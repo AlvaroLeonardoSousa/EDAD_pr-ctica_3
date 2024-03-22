@@ -33,7 +33,33 @@ bool squeue_isEmpty(const SortedQueue *q) {
 }
 
 Status squeue_push(SortedQueue *q, void *elem, compare_elem_fn cmp) {
-    return queue_push(q, elem, cmp);
+    
+    void *aux = NULL;
+
+    if (!q|| !elem) {
+        return ERROR;
+    }
+
+    while (!queue_isEmpty(q) && cmp(elem, queue_getFront(q)) > 0) {
+        aux = queue_pop(q);
+        if(queue_push(q, aux) == ERROR) {
+            return ERROR;
+        }
+    }
+
+    if(queue_push(q, elem) == ERROR) {
+        return ERROR;
+    }
+
+    while (!queue_isEmpty(q) && cmp(elem, queue_getFront(q)) <= 0) {
+        aux = queue_pop(q);
+        if(queue_push(q, aux) == ERROR) {
+            return ERROR;
+        }
+    }
+
+    return OK;
+
 }
 
 void *squeue_pop(SortedQueue *q) {

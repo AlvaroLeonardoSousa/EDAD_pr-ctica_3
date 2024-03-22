@@ -14,8 +14,6 @@ seguirlo, la función push de SortedQueue usará las funciones pop y push de Que
 siguiente:
 (1) Mientras el primer elemento de la cola sea menor que 24, lo extraemos (pop) y lo volvemos a
 insertar (push) al final. Tras este proceso la cola queda así:
-2
-Práctica 3 - EDAT 2023-24
 29 35 40 42 48 4 5 12 21
 (2) Insertamos (push) el 24 en la cola, que queda así:
 29 35 40 42 48 4 5 12 21 24
