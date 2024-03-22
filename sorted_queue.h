@@ -4,6 +4,7 @@
 #include "elements.h"
 #include "queue.h"
 #include "types.h"
+#include "maze.h"
 #include <stdbool.h>
 #include <stdio.h>
 
