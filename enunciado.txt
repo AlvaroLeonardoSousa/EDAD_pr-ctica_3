@@ -1,0 +1,69 @@
+Ejercicio 1: uso del TAD Cola
+En este ejercicio vamos a implementar el TAD SortedQueue tomando como punto de partida el TAD
+Queue proporcionado (interfaz queue.h y librería estática libqueue.a). Lo implementaremos en
+los ficheros sorted_queue.c y sorted_queue.h. Una SortedQueue representa una cola con
+sus elementos ordenados de menor a mayor de acuerdo a una función de comparación que dependerá
+del tipo de dato almacenado en la cola.
+Para conseguir que la SortedQueue mantenga sus elementos ordenados, sólo es necesario modificar
+la primitiva push. A continuación se ilustra la idea general con un ejemplo concreto.
+Supongamos que tenemos una SortedQueue de números enteros con el siguiente contenido (el
+front está a la izquierda y el rear a la derecha):
+4 5 12 21 29 35 40 42 48
+Queremos insertar el número 24 en la cola, de modo que la cola siga estando ordenada. Para con-
+seguirlo, la función push de SortedQueue usará las funciones pop y push de Queue de la manera
+siguiente:
+(1) Mientras el primer elemento de la cola sea menor que 24, lo extraemos (pop) y lo volvemos a
+insertar (push) al final. Tras este proceso la cola queda así:
+2
+Práctica 3 - EDAT 2023-24
+29 35 40 42 48 4 5 12 21
+(2) Insertamos (push) el 24 en la cola, que queda así:
+29 35 40 42 48 4 5 12 21 24
+(3) Mientras el primer elemento de la cola sea mayor o igual que 24, lo extraemos (pop) y lo volvemos
+a insertar (push) al final. Tras este proceso la cola queda ordenada:
+4 5 12 21 24 29 35 40 42 48
+Completa, en el fichero sorted_queue.c proporcionado, el código de la función
+Status squeue_push(SortedQueue *q, void *ele, p_queue_ele_cmp pcmp).
+El tipo p_queue_ele_cmp, definido en el fichero sorted_queue.h, es un puntero a la función
+que se usará para comparar dos elementos de la cola.
+Observa que el código del resto de primitivas simplemente encapsula llamadas a las funciones corre-
+spondientes de Queue.
+Importante: Debes incluir, en los comentarios de la cabecera de la función, una descripción del
+pseudocódigo implementado.
+Comprobación de la funcionalidad
+Construye un programa principal, con nombre p3_e1.c, que pruebe la funcionalidad del TAD
+SortedQueue utilizando colas que almacenen datos de tres tipos diferentes:
+• Números enteros.
+• Puntos (de acuerdo al TAD Point utilizado en la práctica anterior).
+• Cadenas de texto.
+El tipo de pruebas a realizar se deja a discreción del estudiante, pero lo mínimo sería comprobar que
+la cola siempre se mantiene ordenada. Includo comprobar que se puede usar la misma cola con los
+diferentes tipos de datos (simepre que partamos de una cola vacía para cada tipo de dato). Otras
+pruebas, también deseables, implican verificar que la función squeue_push es capaz de gestionar
+de manera adecuada situaciones anómalas (por ejemplo el puntero q es NULL) y casos límite (una
+cola vacía, una cola con un único elemento, o una cola con un número extremadamente grande de
+elementos, por ejemplo).
+Nota: Para comparar cadenas de texto lo más lógico es utilizar la función strcmp de string.h. Sin
+embargo el prototipo de esta función es
+3
+Práctica 3 - EDAT 2023-24
+int strcmp(const char *s1, const char *s2),
+que no coincide con lo que espera squeue_push. En efecto, el puntero a la función de comparación
+utilizado en squeue_push es de esta forma:
+int (*p_queue_ele_cmp)(const void *, const void *).
+Observa que los argumentos son punteros a void en este último caso, y punteros a char en strcmp.
+Para garantizar la compatibilidad con squeue_push es conveniente encapsular la llamada a strcmp
+en una función que tenga el prototipo adecuado, por ejemplo:
+int string_cmp(const void *s1, const void *s2) {
+return strcmp((char *)s1, (char *)s2);
+}
+De forma análoga, hasta ahora, la función point_equaltenía un prototipo que no era compatible:
+bool point_equal(const void *p1, const void *p2);
+Por ello, tendrás que crear una nueva función (y su declarar su prototipo en maze.h) que compare
+dos puntos. El prototipo será:
+int point_cmp(const void *p1, const void *p2);
+Y devolverá un valor mayor que 0 si p1 es mayor que p2, 0 si son iguales y un valor menor que 0 si p2 es
+mayor que p1. Para la comparación, se calculará la distancia euclidea al origen de coordenadas. Si son
+iguales, se comparará el símbolo 
+
+Codeium ha de leer este fichero y realizar proposiciones de código acordes a los objetivos del ejercicio
