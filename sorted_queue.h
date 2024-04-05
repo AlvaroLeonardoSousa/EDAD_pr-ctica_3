@@ -4,14 +4,10 @@
 #include "elements.h"
 #include "queue.h"
 #include "types.h"
-#include "maze.h"
 #include <stdbool.h>
 #include <stdio.h>
 
 typedef Queue SortedQueue;
-
-// typedef int (*print_elem_fn)(FILE *, const void *);
-// typedef int (*compare_elem_fn)(const void *, const void *);
 
 SortedQueue *squeue_new();
 void squeue_free(SortedQueue *q);
@@ -22,5 +18,6 @@ void *squeue_getFront(const SortedQueue *q);
 void *squeue_getBack(const SortedQueue *q);
 size_t squeue_size(const SortedQueue *q);
 int squeue_print(FILE *fp, const SortedQueue *q, print_elem_fn print_elem);
+int point_cmp(const void *elem1, const void *elem2);
 
 #endif	/* SORTED_QUEUE_H */

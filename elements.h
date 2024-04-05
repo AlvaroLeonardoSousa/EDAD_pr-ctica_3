@@ -50,4 +50,12 @@ typedef void (*process_elem_fn)(const void *element);
 /* PROTOTYPES FOR SPECIFIC FUNCTIONS OF THESE TYPES*/
 int int_print(FILE *pf, const void *a);
 int char_print(FILE *pf, const void *a);
+
+int string_print(FILE *fp, const void *p);
+
+int str_cmp(const void *elem1, const void *elem2);
+int int_cmp(const void *elem1, const void *elem2);
+
+
+
 #endif
