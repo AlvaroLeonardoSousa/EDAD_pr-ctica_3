@@ -8,15 +8,21 @@
 #ifndef LIST_H
 #define LIST_H
 
-#include "types.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include "types.h"
+
+typedef struct _Node Node;
 
 /**
  * List type definition: a list of arbitrary elements.
  */
 typedef struct _List List;
+
+
+
 
 /**
  * p_list_ele_print type definition: pointer to a function that prints a

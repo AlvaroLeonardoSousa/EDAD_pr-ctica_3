@@ -50,8 +50,8 @@ bool queue_isEmpty(const Queue *q);
  * @param ele A pointer to the element to be inserted.
  *
  * @return OK on success, ERROR otherwise.
- *  */
-Status queue_push(Queue *q, void *ele);
+ **/
+Status queue_push(Queue *q, const void *ele);
 
 /**
  * @brief This function is used to extract an element from the front position of
